@@ -4,8 +4,8 @@ import argparse
 import binascii
 import sys
 
-from pycoin import ecdsa, encoding
-from pycoin.ecdsa import secp256k1
+import ecdsa, encoding
+from ecdsa import secp256k1
 
 def b2h(b):
     return binascii.hexlify(b).decode("utf8")

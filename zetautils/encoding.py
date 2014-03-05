@@ -163,12 +163,12 @@ def is_hashed_base58_valid(base58):
     return True
 
 def private_byte_prefix(is_test):
-    """WIF prefix. Returns b'\x80' for main network and b'\xef' for testnet"""
-    return b'\xef' if is_test else b'\x80'
+    """WIF prefix. Returns b'\xE0' for zetacoin network"""
+    return b'\xE0'
 
 def public_byte_prefix(is_test):
-    """Address prefix. Returns b'\0' for main network and b'\x6f' for testnet"""
-    return b'\x6f' if is_test else b'\0'
+    """Address prefix. Returns b'\x50' for zetacoin network"""
+    return b'\x50'
 
 def wif_to_tuple_of_secret_exponent_compressed(wif, is_test=False):
     """Convert a WIF string to the corresponding secret exponent. Private key manipulation.
@@ -250,16 +250,15 @@ def bitcoin_address_to_hash160_sec_with_network(bitcoin_address):
     blob = a2b_hashed_base58(bitcoin_address)
     if len(blob) != 21:
         raise EncodingError("incorrect binary length (%d) for Bitcoin address %s" % (len(blob), bitcoin_address))
-    if blob[:1] not in [b'\x6f', b'\0']:
+    if blob[:1] not in [b'\50']:
         raise EncodingError("incorrect first byte (%s) for Bitcoin address %s" % (blob[0], bitcoin_address))
-    network = 'main' if blob[:1] == b'\0' else 'test'
-    return blob[1:], network
+    return blob[1:], 'zetacoin'
 
 def bitcoin_address_to_hash160_sec(bitcoin_address, is_test=False):
     """Convert a Bitcoin address back to the hash160_sec format of the public key.
     Since we only know the hash of the public key, we can't get the full public key back."""
     hash160, network = bitcoin_address_to_hash160_sec_with_network(bitcoin_address)
-    if (network == 'main') == (not is_test):
+    if (network == 'zetacoin') == (not is_test):
         return hash160
     raise EncodingError("Bitcoin address %s for wrong network (%s)" % (bitcoin_address, network))
 
@@ -273,6 +272,6 @@ def is_valid_bitcoin_address(bitcoin_address, allow_main=True, allow_test=False)
         hash160, network = bitcoin_address_to_hash160_sec_with_network(bitcoin_address)
     except EncodingError:
         return False
-    if network == 'main':
+    if network == 'zetacoin':
         return allow_main
     return allow_test

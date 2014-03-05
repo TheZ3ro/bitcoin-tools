@@ -2,31 +2,23 @@
 
 from setuptools import setup
 
-version = "0.26"
+version = "0.1"
 
 setup(
-    name="pycoin",
+    name="zetautils",
     version=version,
     packages = [
-        "pycoin",
-        "pycoin.convention",
-        "pycoin.ecdsa",
-        "pycoin.tx",
-        "pycoin.tx.script",
-        "pycoin.serialize",
-        "pycoin.services",
-        "pycoin.scripts"
+        "zetautils",
+        "zetautils.ecdsa",
     ],
-    author="Richard Kiss",
+    author="TheZero",
     entry_points = { 'console_scripts':
             [
-                'genwallet = pycoin.scripts.genwallet:main',
-                'spend = pycoin.scripts.spend:main',
-                'bu = pycoin.scripts.bitcoin_utils:main',
+                'zetautils = zetautils.zetacoin_utils:main',
             ]
         },
-    author_email="him@richardkiss.com",
-    url="https://github.com/richardkiss/pycoin",
+    author_email="io@thezero.org",
+    url="https://github.com/zbad405/zetacoin-address-utils",
     license="http://opensource.org/licenses/MIT",
-    description="A bunch of utilities that might be helpful when dealing with Bitcoin addresses and transactions."
+    description="A bunch of utilities that might be helpful when dealing with Zetacoin addresses."
 )
