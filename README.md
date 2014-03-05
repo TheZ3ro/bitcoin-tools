@@ -21,8 +21,11 @@ Donate
 ------
 
 Want to donate? Feel free. Send to 
+
 BTC: 1HLaDgzd6maSFJbSCBC4hToEpGA5BNdN29
+
 ZET: ZZy8BUn3Wt84RvE386vhwb9Lse3ZwJ7rKN
+
 Or send me a mail... io@thezero.org.
 
 
