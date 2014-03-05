@@ -16,6 +16,10 @@ Zetautils is Pycoin's based, use his bitcoin-utils.
 
 Pycoin CREDIT, CHANGES and LICENSE are renamed to \*-pycoin.
 
+https://github.com/richardkiss/pycoin
+http://blog.richardkiss.com/?p=371
+
+
 
 Donate
 ------
