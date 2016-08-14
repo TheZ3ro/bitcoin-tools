@@ -9,9 +9,9 @@ This is an implementation of a bunch of utility routines that may be useful when
 Usage
 -----------------
 
-`bt-msg --sign -p private.txt -a -f sig.txt`
-`bt-msg --verify -f sig.txt`
-`bt-adr "5KYZdUEo39z3FPrtuX2QbbwGnNP5zTd7yyr2SC1j299sBCnWjss" -a`
+`bt-msg --sign -p private.txt -a -f sig.txt`<br/>
+`bt-msg --verify -f sig.txt`<br/>
+`bt-adr "5KYZdUEo39z3FPrtuX2QbbwGnNP5zTd7yyr2SC1j299sBCnWjss" -a`<br/>
 
 Credit
 -----------------
@@ -22,7 +22,7 @@ TheZero - io@thezero.org
 Pycoin Fork
 ----------------
 
-Zetautils is Pycoin's based, use his bitcoin-utils.
+Bitcoin-tools is Pycoin's based, use his bitcoin-utils.
 
 Pycoin CREDIT, CHANGES and LICENSE are renamed to \*-pycoin.
 
@@ -37,7 +37,5 @@ Donate
 Want to donate? Feel free. Send to
 
 BTC: 1HLaDgzd6maSFJbSCBC4hToEpGA5BNdN29
-
-ZET: ZZy8BUn3Wt84RvE386vhwb9Lse3ZwJ7rKN
 
 Or send me a mail... io@thezero.org.
