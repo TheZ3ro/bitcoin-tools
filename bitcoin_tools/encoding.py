@@ -163,12 +163,12 @@ def is_hashed_base58_valid(base58):
     return True
 
 def private_byte_prefix(is_test):
-    """WIF prefix. Returns b'\xE0' for zetacoin network"""
-    return b'\xE0'
+    """WIF prefix. Returns b'\x80' for bitcoin network"""
+    return b'\x80'
 
 def public_byte_prefix(is_test):
-    """Address prefix. Returns b'\x50' for zetacoin network"""
-    return b'\x50'
+    """Address prefix. Returns b'\0' for bitcoin network"""
+    return b'\0'
 
 def wif_to_tuple_of_secret_exponent_compressed(wif, is_test=False):
     """Convert a WIF string to the corresponding secret exponent. Private key manipulation.
@@ -217,14 +217,14 @@ def sec_to_public_pair(sec):
     sec0 = sec[:1]
     if sec0 == b'\4':
         y = from_bytes_32(sec[33:65])
-        from .ecdsa import generator_secp256k1, is_public_pair_valid
+        from ecdsa import generator_secp256k1, is_public_pair_valid
         public_pair = (x, y)
         # verify this is on the curve
         if not is_public_pair_valid(generator_secp256k1, public_pair):
             raise EncodingError("invalid (x, y) pair")
         return public_pair
     if sec0 in (b'\2', b'\3'):
-        from .ecdsa import public_pair_for_x, generator_secp256k1
+        from ecdsa import public_pair_for_x, generator_secp256k1
         return public_pair_for_x(generator_secp256k1, x, is_even=(sec0==b'\2'))
     raise EncodingError("bad sec encoding for public key")
 
@@ -250,15 +250,15 @@ def bitcoin_address_to_hash160_sec_with_network(bitcoin_address):
     blob = a2b_hashed_base58(bitcoin_address)
     if len(blob) != 21:
         raise EncodingError("incorrect binary length (%d) for Bitcoin address %s" % (len(blob), bitcoin_address))
-    if blob[:1] not in [b'\50']:
+    if blob[:1] not in [b'\0']:
         raise EncodingError("incorrect first byte (%s) for Bitcoin address %s" % (blob[0], bitcoin_address))
-    return blob[1:], 'zetacoin'
+    return blob[1:], 'main'
 
 def bitcoin_address_to_hash160_sec(bitcoin_address, is_test=False):
     """Convert a Bitcoin address back to the hash160_sec format of the public key.
     Since we only know the hash of the public key, we can't get the full public key back."""
     hash160, network = bitcoin_address_to_hash160_sec_with_network(bitcoin_address)
-    if (network == 'zetacoin') == (not is_test):
+    if (network == 'main') == (not is_test):
         return hash160
     raise EncodingError("Bitcoin address %s for wrong network (%s)" % (bitcoin_address, network))
 
@@ -272,6 +272,6 @@ def is_valid_bitcoin_address(bitcoin_address, allow_main=True, allow_test=False)
         hash160, network = bitcoin_address_to_hash160_sec_with_network(bitcoin_address)
     except EncodingError:
         return False
-    if network == 'zetacoin':
+    if network == 'main':
         return allow_main
     return allow_test
